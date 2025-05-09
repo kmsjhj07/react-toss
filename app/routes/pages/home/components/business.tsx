@@ -30,7 +30,7 @@ const Service = ({ title, description, buttonText }: ServiceProps) => {
 
 export default function Business() {
   return (
-    <section className="h-[1927px] bg-black">
+    <section className="h-[2050px] bg-black">
       <div className="pt-[100px]">
         <img src="/images/devices.png" alt="devices" className="w-full" />
       </div>
