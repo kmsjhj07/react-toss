@@ -39,7 +39,7 @@ const FOOTER_NAV: FooterNavProps[] = [
   {
     title: '서비스',
     data: [
-      { label: '공지사항', link: '#' },
+      { label: '공지사항', link: '/notice' },
       { label: '자주 묻는 질문', link: '#' },
       { label: '공동인증서 관리', link: '#' },
       { label: '계정 일시잠금', link: '#' },
@@ -131,7 +131,7 @@ export default function Footer() {
               ㈜비바리퍼블리카
             </h2>
           </div>
-          <div className="text-[15px] leading-[20px] font-[700] text-[#8b95a1]">
+          <div className="text-[15px] leading-[20px] font-[400] text-[#8b95a1]">
             <p>사업자 등록번호 : 120-88-01280 | 대표 : 이승건</p>
             <p>
               호스팅 서비스 : 주식회사 비바리퍼블리카 | 통신판매업 신고번호 :
