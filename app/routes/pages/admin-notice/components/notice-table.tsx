@@ -1,9 +1,7 @@
 import dayjs from 'dayjs';
 import { ArrowUpDown } from 'lucide-react';
-import { useSearchParams } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
-import { Button } from '~/components/ui/button';
-import { Input } from '~/components/ui/input';
 import {
   Table,
   TableBody,
@@ -13,34 +11,25 @@ import {
   TableRow,
 } from '~/components/ui/table';
 import type { Notice } from '~/generated/prisma';
-import { SortOrder } from '~/generated/prisma/internal/prismaNamespace';
-
-import NoticePagination from './notice-pagination';
 
 interface Props {
   notices: Notice[];
-  totalCount: number;
-  page: number;
 }
 
-export const NoticeTable = ({ notices, totalCount, page }: Props) => {
+export const NoticeTable = ({ notices }: Props) => {
   const [_, setSearchParams] = useSearchParams();
   const handleSort = () => {
     setSearchParams((current) => {
       const params = {
         ...Object.fromEntries(current),
       };
-      params.sort = params.sort === SortOrder.asc ? SortOrder.desc : SortOrder.asc;
+      params.sort = params.sort === 'asc' ? 'desc' : 'asc';
       return params;
     });
   };
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between">
-        <Input className="w-100" placeholder="공지사항 제목으로 검색..." />
-        <Button>새 공지사항 등록</Button>
-      </div>
       <Table>
         <TableHeader>
           <TableRow>
@@ -59,7 +48,11 @@ export const NoticeTable = ({ notices, totalCount, page }: Props) => {
           {notices.map((notice) => (
             <TableRow key={notice.id}>
               <TableCell>{notice.id}</TableCell>
-              <TableCell>{notice.title}</TableCell>
+              <TableCell>
+                <Link to={`/admin/notice/${notice.id}`} className="hover:underline">
+                  {notice.title}
+                </Link>
+              </TableCell>
               <TableCell>
                 {dayjs(notice.createdAt).format('YYYY.MM.DD HH:mm:ss')}
               </TableCell>
@@ -70,9 +63,6 @@ export const NoticeTable = ({ notices, totalCount, page }: Props) => {
           ))}
         </TableBody>
       </Table>
-      <div className="mt-8">
-        <NoticePagination totalCount={totalCount} page={page} />
-      </div>
     </div>
   );
 };
